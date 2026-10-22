@@ -1,0 +1,39 @@
+name: build-firmware
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage canonical /lib/firmware layout (strip vendor prefix)
+        run: |
+          mkdir -p out
+          cp -a xiaomi-vermeer/. out/
+          find out -type f | sort | sed 's/^/  /'
+
+      - name: Fix board-2 subsystem-device (0113 -> 1107, same length)
+        run: |
+          f=out/ath12k/WCN7850/hw2.0/board-2.bin
+          if grep -qa 'subsystem-device=0113' "$f"; then
+            echo "patching $f"
+            sed -i 's/subsystem-device=0113/subsystem-device=1107/' "$f"
+          fi
+          python3 scripts/check-board2.py "$f"
+
+      - name: Make tarball
+        run: |
+          mkdir -p dist
+          tar -C out -czf dist/vermeer-firmware.tar.gz .
+          ls -l dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vermeer-firmware
+          path: dist/vermeer-firmware.tar.gz
+          if-no-files-found: error

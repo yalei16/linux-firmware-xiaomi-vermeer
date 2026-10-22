@@ -1,0 +1,25 @@
+Driver: ath12k - Qualcomm WCN7850 (WiFi 7), PCI 17cb:1107
+File: xiaomi-vermeer/ath12k/WCN7850/hw2.0/amss.bin
+File: xiaomi-vermeer/ath12k/WCN7850/hw2.0/m3.bin
+File: xiaomi-vermeer/ath12k/WCN7850/hw2.0/board-2.bin
+File: xiaomi-vermeer/ath12k/WCN7850/hw2.0/qdss.cfg
+File: xiaomi-vermeer/ath12k/WCN7850/hw2.0/regdb.bin
+Licence: Qualcomm proprietary, redistributable only for use with the hardware
+
+Driver: adreno - Qualcomm Adreno 740 (SM8550)
+File: xiaomi-vermeer/qcom/a740_sqe.fw
+File: xiaomi-vermeer/qcom/gmu_gen70200.bin
+Licence: Qualcomm proprietary
+
+Driver: qcom-vermeer - SM8550 vermeer platform firmware
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/a740_zap.mbn
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/CAMERA_ICP.mbn
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/evass.mbn
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/vpu30_4v.mbn
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/aw882xx_acf.bin
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/goodix_cfg_group_vermeer.bin
+File: xiaomi-vermeer/qcom/sm8550/xiaomi/vermeer/goodix_firmware_vermeer.bin
+Licence: Qualcomm/Xiaomi proprietary
+
+Note: 安装目标是 /lib/firmware，因此 xiaomi-vermeer/ 前缀在构建产物中会被剥掉
+      （见 .github/workflows/build-firmware.yml 的 "Stage canonical layout" 步骤）。
